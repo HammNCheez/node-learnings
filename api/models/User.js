@@ -44,7 +44,7 @@ module.exports = {
             });
         }
 
-        require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword) {
+        require('bcrypt-nodejs').hash(values.password, null, null, function passwordEncrypted(err, encryptedPassword) {
             if (err) return next(err);
 
             values.encryptedPassword = encryptedPassword;
