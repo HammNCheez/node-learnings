@@ -31,7 +31,10 @@ module.exports.policies = {
   user: {
     'new': 'flash',
     create: 'flash',
-    '*': 'sessionAuth'
+    show: 'myProfile',
+    edit: 'myProfile',
+    update: 'myProfile',
+    '*': 'admin'
   }
 
 

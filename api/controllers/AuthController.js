@@ -67,20 +67,21 @@ module.exports = {
                     res.redirect('/login');
                     return;
                 }
+
+
+                //Log user in
+                req.session.authenticated = true;
+                req.session.user = user;
+
+                //If admin user then redirect to user list
+                if (req.session.user.admin) {
+                    res.redirect('/user');
+                    return;
+                }
+
+                //redirect to their profile page
+                res.redirect('/user/show/' + user.userId);
             });
-
-            //Log user in
-            req.session.authenticated = true;
-            req.session.user = user;
-
-            //If admin user then redirect to user list
-            if(req.session.user.admin){
-                res.redirect('/user');
-                return;
-            }
-
-            //redirect to their profile page
-            res.redirect('/user/show/' + user.userId);
         });
     },
 

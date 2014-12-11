@@ -68,12 +68,19 @@ module.exports = {
     },
 
     update: function(req, res, next) {
+        var updatedUser = req.params.all();
+
+        updatedUser.admin = updatedUser.admin === 'yes' ? true : false;
+
         User.update({
             userId: req.param('id')
-        }, req.params.all(), function userUpdated(err) {
+        }, updatedUser, function userUpdated(err) {
             if (err) {
                 return res.redirect('/user/edit/' + req.param('id'));
             }
+
+            if(req.session.user.userId === updatedUser.useId)
+                req.session.users = updatedUser;
 
             res.redirect('/user/show/' + req.param('id'));
         });
