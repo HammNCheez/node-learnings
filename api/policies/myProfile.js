@@ -4,6 +4,19 @@
  */
 
 module.exports = function(req, res, next) {
+    if (!req.session.authenticated) {
+        var logonRequiredError = [{
+            name: 'logonRequired',
+            message: 'You must be signed in to view this page'
+        }];
+
+        req.session.flash = {
+            err: logonRequiredError
+        };
+        res.redirect('/login');
+        return;
+    }
+
     var sessionUserMatchesId = req.session.user.userId === req.param('id');
     var isAdmin = req.session.user.admin;
 
