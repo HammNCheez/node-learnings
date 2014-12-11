@@ -1,7 +1,7 @@
 <form action="/user/update/<%= user.userId %>" method="POST" class="form-signin">
     <h2>Editing user <%=user.userId %></h2>
     <input value="<%= user.name %>" name="name" type="text" class="form-control" />
-    <input value="<%= user.role %>" name="title" type="text" class="form-control" />
+    <input value="<%= user.role %>" name="role" type="text" class="form-control" />
     <input value="<%= user.email %>" name="email" type="text" class="form-control" />
     <% if(session.authenticated && session.user.admin) { %>
     	<% if (user.admin) { %>
